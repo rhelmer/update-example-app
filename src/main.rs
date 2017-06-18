@@ -33,7 +33,7 @@ fn main() {
     fs::copy(result_message.download_path,
         format!("./updates/{}", result_message.update_type)).unwrap();
 
-    println!("{} update has been applied in ./update/{}\n",
+    println!("{} update has been applied in ./updates/{}\n",
         result_message.update_type,
         result_message.update_type);
 
