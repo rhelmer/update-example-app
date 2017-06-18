@@ -1,5 +1,5 @@
-Example app for Update Client
-=============================
+Example app for Application Update client
+=========================================
 
 This is a simple Rust app to exercise the [Application Update client](https://github.com/rhelmer/update-client).
 
