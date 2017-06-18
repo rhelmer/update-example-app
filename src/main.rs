@@ -3,6 +3,7 @@ extern crate serde_derive;
 extern crate serde;
 extern crate serde_json;
 
+use std::fs;
 use std::process::Command;
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -23,7 +24,20 @@ fn main() {
     let json_str = String::from_utf8_lossy(&output.stdout);
     let result_message: ResultMessage = serde_json::from_str(&json_str).unwrap();
 
-    println!("{} update is ready to apply at {}",
+    println!("{} update is ready to apply at {}\n",
         result_message.update_type,
         result_message.download_path);
+
+    println!("Applying update for {}...", result_message.update_type);
+
+    fs::copy(result_message.download_path,
+        format!("./updates/{}", result_message.update_type)).unwrap();
+
+    println!("{} update has been applied in ./update/{}\n",
+        result_message.update_type,
+        result_message.update_type);
+
+    println!("All done!");
+    println!("\n-----------------------------------------------------\n");
+
 }
