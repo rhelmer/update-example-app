@@ -22,7 +22,10 @@ fn main() {
         .expect("failed to execute process");
 
     let json_str = String::from_utf8_lossy(&output.stdout);
-    let result_message: ResultMessage = serde_json::from_str(&json_str).unwrap();
+    let result_message: ResultMessage = match serde_json::from_str(&json_str) {
+        Ok(v) => v,
+        Err(e) => panic!("Unexpected result from the update client {:?}, {:?}", &json_str, e),
+    };
 
     println!("{} update is ready to apply at {}\n",
         result_message.update_type,
